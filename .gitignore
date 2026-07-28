@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Fine-tuned model folders - too large for GitHub (16GB each)
+Llama-3.1-8B-Instruct-FineTuned-Classifier-v1/
+Llama-3.1-8B-Instruct-FineTuned-InsightWriter-v1/
+*-adapters/
+*.safetensors
+*.bin
+
+# DeepEval local files
+.deepeval/
+.env.local
