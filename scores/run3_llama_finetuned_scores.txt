@@ -1,0 +1,343 @@
+(base) jatta@Praveens-MacBook-Pro Code % python3.11 test_feedback_engineering.py
+============================================================
+FEEDBACK TO ENGINEERING INSIGHTS - DeepEval Evaluation
+============================================================
+
+============================================================
+EVALUATING DETAILED FEEDBACK (4 test cases)
+============================================================
+✨ You're running DeepEval's latest Engineering Groundedness (GEval) Metric! (using gpt-4o, 
+strict=False, async_mode=True)...
+✨ You're running DeepEval's latest Engineering Usefulness (GEval) Metric! (using gpt-4o, 
+strict=False, async_mode=True)...
+✨ You're running DeepEval's latest Answer Relevancy Metric! (using gpt-4o, strict=False, 
+async_mode=True)...
+Evaluating 4 test case(s) in parallel: |████████|100% (4/4) [Time Taken: 00:11,  2.85s/test case]
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Engineering Groundedness (GEval) (score: 0.6999891867661209, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: Reproduction steps align with user feedback but are marked as insufficient data. No invented system names or architecture details are present. The output does not include fabricated user counts or revenue impacts. However, the data gaps section includes some technical specifics not mentioned by the user, such as server-side logs., error: None)
+  - ✅ Engineering Usefulness (GEval) (score: 0.9010797326087877, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output provides practical insights for engineers, accurately identifies the affected system as the checkout component on iOS Safari, includes a reasonable checklist for further investigation, and mentions data gaps like specific discount codes and server-side logs. However, there is a minor typo in 'AFFECTED COMPONENTDateS' which slightly detracts from clarity., error: None)
+  - ✅ Answer Relevancy (score: 0.9629629629629629, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.96 because the response effectively addresses the main issue of the checkout page freezing on an iPhone 14 using Safari. However, it could not be higher due to a minor irrelevant statement about insufficiently detailed reproduction steps, which does not directly relate to the user's specific problem., error: None)
+
+For test case:
+
+  - input: The checkout page keeps freezing when I try to apply a discount code on my iPhone 14. Happens every time. I've lost 3 orders this week because of it. Using Safari, latest iOS. -- App Store review, 1 star
+  - actual output: === ENGINEERING INSIGHT === TITLE: Checkout freeze on iOS Safari when applying discount codes TICKET_TYPE: BUG SEVERITY: P2-HIGH
+
+TE An iOS Safari user reports a 100% reproduction rate freeze when attempting to apply discount codes on the checkout page using an iPhone 14 with the latest iOS version. The freeze is blocking order completion, resulting in 3 lost orders in one week.
+
+AFFECTED COMPONENTDateS:
+
+System: Frontend (Checkout component)
+Platform: iOS (Safari)
+Environment: iPhone 14, latest iOS version
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+Open the checkout page on iPhone 14 with Safari (latest iOS)
+Add items to cart and proceed to checkout
+Attempt to apply a discount code
+Page freezes completely (user reports unable to interact with the page, cannot navigate away)
+INVESTIGATION CHECKLIST:
+
+[ ] Check Safari console logs for any JavaScript errors during the discount code application
+[ ] Verify if the freeze occurs on other iOS devices/Safari versions
+[ ] Check if the freeze happens with all discount codes or specific codes
+[ ] Review recent changes to the discount code application logic
+[ ] Check networkanship between the freeze and discount code API calls
+DATA GAPS FOR ENGINEERING:
+
+Exact discount code triggering the freeze (if it's specific to certain codes)
+Whether the freeze is a full page hang or a JavaScript freeze
+Whether other iOS devices/Safari versions are affected
+Server-side logs for discount code API calls during the freeze
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUST Turning P2-HIGH - user reports 100% reproduction on a production environment, 3 lost orders in one week, and the freeze is on the checkout page. This blocks revenue and has a high blast radius.
+
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Engineering Groundedness (GEval) (score: 0.6531504403494373, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: Reproduction steps include actions mentioned by the user, but also add assumptions like 'Completed onboarding' and 'Clicked through the getting started guide link'. No internal system names or architecture details are added. No user counts, percentages, or revenue impacts are fabricated. Data gaps reflect user feedback but include additional unknowns like 'Account ID for server-side investigation'., error: None)
+  - ✅ Engineering Usefulness (GEval) (score: 0.9496093829470919, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output provides useful information for investigation by identifying the 404 error and outdated UI as issues. It correctly identifies the affected system as the frontend onboarding flow on Chrome for Windows. The checklist includes reasonable steps like checking the URL and UI differences. Data gaps such as the exact URL and HTTP status code are clearly stated. However, the reproduction steps are noted as insufficient data, slightly affecting completeness., error: None)
+  - ✅ Answer Relevancy (score: 0.8888888888888888, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.89 because the response effectively addresses the user's main concerns about the onboarding flow and the discrepancies in the UI shown in tutorials. However, it includes some irrelevant statements, such as incorrect claims about the user's experience with YouTube tutorials and onboarding completion, which prevent the score from being higher., error: None)
+
+For test case:
+
+  - input: The onboarding flow is confusing. I signed up yesterday and still can't figure out how to create my first project. The getting started guide links to a 404 page. I watched 3 YouTube tutorials and they all show a different UI than what I see. Free plan, Chrome on Windows. -- Support ticket
+  - actual output: === ENGINEERING INSIGHT === TITLE: Incomplete onboarding - 404 on getting started guide, outdated YouTube tutorial UI matches TICKET_TYPE: BUG SEVERITY: P3-MEDIUM
+
+TECHNICAL SUMMARY: The getting started guide link in the onboarding flow returns a 404 error. External YouTube tutorials show a UI that matches what the user sees, indicating the actual UI has regression or has changed since the video was created. This blocks a new Free plan user from creating their first project.
+
+AFFECTED COMPONENTS:
+
+System: Frontend (onboarding flow, getting breaking guide link)
+Platform: Chrome on Windows
+Environment: Free plan account, created yesterday
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+Signed up for Free plan yesterday
+Completed onboarding
+Clicked through the getting started guide link
+Served a 404 page
+Watched 3 YouTube tutorials showing a different UI than current onboarding
+INVESTIGATION CHECKLIST:
+
+[ ] Check the current URL and status code of the getting started guide link
+[ ] Verify the expected content exists and is up-to-date
+[ ] Check if the link is redirecting correctly through CDNs or redirects
+[ ] Check the UI diff between the current onboarding and the UI shown in the YouTube tutorials
+[ ] Check if the regression is specific to Free plan or all plans
+DATA GAPS FOR ENGINEERING:
+
+Exact URL of the 404 page
+HTTP status code of the 404
+Onboarding flow steps that lead to the 404 (what specifically was clicked)
+Account ID for server-side investigation
+Exact YouTube video IDs for the tutorials
+PRIORITY RECOMMENDATION: P3-MEDIUM PRIORITY JUSTIFICATION: Onboarding is the first user experience. A 404 on the getting started guide and outdated tutorial UI means a new user cannot complete onboarding. This blocks the user from activating their account and startingaccording to our CAC metrics.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ❌ Engineering Groundedness (GEval) (score: 0.4339294448690919, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: Reproduction steps include assumptions not directly from user feedback, such as making API requests without specific endpoints. Engineering insight introduces technical terms like 'API Gateway' and hypothetical impacts like 'revenue-generating capabilities,' which were not mentioned by the user. However, a 'Data Gaps' section is present, outlining unknowns based on user feedback., error: None)
+  - ✅ Engineering Usefulness (GEval) (score: 0.9865224093002913, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output provides actionable insights by identifying the API Gateway as the affected system and includes a detailed checklist for investigation. It also mentions data gaps such as specific API endpoints and infrastructure details, aligning with the input's description of latency issues and support tickets., error: None)
+  - ✅ Answer Relevancy (score: 0.7241379310344828, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.72 because the response addresses the main issue of API latency degradation, but includes several irrelevant details such as platform specifics, reproduction steps, and infrastructure stack details that do not directly contribute to resolving the latency issue. These extraneous elements dilute the focus, preventing a higher score, yet the core issue is still acknowledged, maintaining a reasonable level of relevancy., error: None)
+
+For test case:
+
+  - input: The API response times have degraded significantly since last month. Our p95 latency went from 200ms to 800ms. We're on the Enterprise plan and this is affecting our production systems. We've opened 3 tickets about this already. Account: api-team@bigcorp.com -- Support ticket
+  - actual output: === ENGINEERING INSIGHT === TITLE: API p95 latency regression from 200ms to 800ms affecting Enterprise plan TICKET_TYPE: BUG SEVERITY: P1-CRITICAL
+
+TECHNICAL SUMMARY: API response times have degraded by 400% since last month, affecting all API requests for an Enterprise customer. p95 latency has increased from 200ms to 800ms. This regression has been reported across 3 separate support tickets, indicating it is a systemic issue and not account-specific.
+
+AFFECTED COMPONENTS:
+
+System: API Gateway
+Platform: Unknown (API team would know infrastructure stack)
+Environment: Production, Enterprise plan
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps:
+
+Make API requests to the production API (specific endpoints not mentioned by user)
+Observed p95 latency at 800ms (up from 200ms)
+This regression started last month
+3 separate support tickets confirm the regression
+INVESTIGATION CHECKLIST:
+
+[ ] Review API request volume and error rates for the past 60 days for signs of changes
+[ ] Check for changes in instance count, scaling, or resource utilization on the API nodes
+[ ] Review recent deploy history for API service for any changes, bug fixes, or config updates
+[ ] Check for changes in database query performance or schema
+[ ] Verify if the regression is consistent across all endpoints or specific to certain fleets
+DATA GAPS FOR ENGINEERING:
+
+Specific API endpoints affected
+Request volumes and error rates pre-regression vs post-regression
+API infrastructure stack (containerization, instance type, load balancer)
+Recent deploy history for the API service
+Database query performance changes
+PRIORITY RECOMMENDATION: P1-CRITICAL PRIORITY JUSTIFICATION: 400% regression in p95 latency on a production API for an Enterprise customer is a showstopper. 3 confirmations across separate tickets indicate this is a systemic issue, not account-specific. API latency directly impacts revenue-generating capabilities for the customer.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Engineering Groundedness (GEval) (score: 0.6805908485615593, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: Reproduction steps are marked as insufficient, reflecting a lack of strict adherence to user feedback. Technical terms like 'session fixation' and 'token reuse' are introduced, which were not specified by the user. The DATA GAPS section accurately reflects unknowns without unsupported data., error: None)
+  - ✅ Engineering Usefulness (GEval) (score: 0.9515619915723017, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output provides useful insights for an engineer by identifying the unauthorized login and compromised credentials. It clearly identifies the affected system as the authentication system for account AC-41209. The checklist aligns with the issues described, including checking logs, verifying password and 2FA security, and reviewing account activity. It articulates data gaps such as the exact time of compromise and whether data was accessed, providing guidance on addressing these gaps., error: None)
+  - ✅ Answer Relevancy (score: 0.7096774193548387, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.71 because the response partially addresses the user's request by acknowledging the login alert and the actions taken (password change and 2FA enabled). However, it includes several irrelevant details such as ticket type, severity level, and environment specifics, which do not directly answer the user's primary concerns about data access, audit logs, and potential impact on other accounts., error: None)
+
+For test case:
+
+  - input: Login alert at 3:47 AM EST from IP 203.0.113.42 (Romania). I did NOT log in. Account: lisa.t@company.com, #AC-41209. Changed password, enabled 2FA. Need: 1) Was data accessed? 2) 30-day audit log 3) Other accounts affected? -- Support ticket
+  - actual output: === ENGINEERING INSIGHT === TITLE: Unauthorized login from Romania on account AC-41209 with compromised credentials TICKET_TYPE: BUG SEVERITY: P2-HIGH
+
+TECHNICAL SUMMARY: A login alert detected an unauthorized access attempt from IP 203.0.113.42 (Romania) at 3:47 AM EST on account AC-41209 (lisa.t@company.com). The user reports they changed their password and enabled 2FA, suggesting their credentials were compromised. We need to determine if account data was accessed and provide the user with a 30-day audit log and information on whether other accounts were affected.
+
+AFFECTED COMPONENTS:
+
+System: Authentication
+Platform: Not platform-specific (cross-platform issue)
+Environment: Production environment, account AC-41209
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User reports no login session started after changing password and enabling 2FA at an unknown previous time.
+Login alert detected access from IP 203.0.113.42 (Romania) at 3:47 AM EST
+INVESTIGATION CHECKLIST:
+
+[ ] Check authentication logs for the account AC-41209 for all login attempts since the password change
+[ ] Verify the new password hash and 2FA secrets were not compromised
+[ ] Check for session fixation or token reuse
+[ ] Run IP lookup and threat intelligence on 203.0mtime.113.42
+[ ] Check for any other accounts with the same password hash compromised in the last 90 days
+[ ] Review account activity for AC-41209 for the past 30 days
+DATA GAPS FOR ENGINEERING:
+
+Exact time of password compromise (before or after the user changed the password)
+Whether data was accessed or what data was accessed
+Session duration and actions performed during the unauthorized session
+Whether the 2FA was bypassed or the authenticator token was captured
+Whether the compromised credentials were used on other accounts
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: Data breach, potential PII exposure. User took security precautions after compromise detected, indicating the attacker likely had access for some time. Need to confirm data access and scope other account compromise.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Overall Metric Pass Rates
+
+Engineering Groundedness (GEval): 75.00% pass rate
+Engineering Usefulness (GEval): 100.00% pass rate
+Answer Relevancy: 100.00% pass rate
+
+======================================================================
+
+
+✓ Tests finished 🎉! Run 'deepeval login' to save and analyze evaluation results on Confident AI.
+ 
+✨👀 Looking for a place for your LLM test data to live 🏡❤️ ? Use Confident AI to get & share 
+testing reports, experiment with models/prompts, and catch regressions for your LLM system. Just 
+run 'deepeval login' in the CLI. 
+
+
+============================================================
+EVALUATING VAGUE FEEDBACK (4 test cases)
+============================================================
+✨ You're running DeepEval's latest Vague Feedback Handling (GEval) Metric! (using gpt-4o, 
+strict=False, async_mode=True)...
+✨ You're running DeepEval's latest Answer Relevancy Metric! (using gpt-4o, strict=False, 
+async_mode=True)...
+Evaluating 4 test case(s) in parallel: |████████|100% (4/4) [Time Taken: 00:14,  3.53s/test case]
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Vague Feedback Handling (GEval) (score: 0.6717053728578408, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output identifies the need for more information and does not invent systems or reproduction steps. However, it lacks explicit recommendations to contact the user and does not mention setting priority to LOW., error: None)
+  - ✅ Answer Relevancy (score: 0.5, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.50 because while the output attempts to address the negative review, it includes statements about writing knowledge and engineering insights that are unrelated to the input, thus diluting the focus on the main issue., error: None)
+
+For test case:
+
+  - input: Terrible. Just terrible. 0 stars if I could.
+  - actual output: Cannot write what I do not know. What is the user feedback? Provide the classified user feedback and I will write a structured engineering insight.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Vague Feedback Handling (GEval) (score: 0.8026662428640685, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The output identifies lack of technical details and asks for more information, but does not explicitly set priority to LOW or mention UNKNOWN components., error: None)
+  - ❌ Answer Relevancy (score: 0.0, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.00 because the output contains multiple irrelevant statements that do not address the subjective nature of the input. The statements focus on structured insights, questions about context, user intent, events, platforms, and conditions, none of which relate to the input's expression of a personal opinion., error: None)
+
+For test case:
+
+  - input: Meh. It's fine I guess.
+  - actual output: INSUFFICIENT DATA for engineering. Cannot write structured insight without user behavior. What would you like to add to provide engineering context? What were you trying to do, what happened, on what platform, and under what conditions?
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Vague Feedback Handling (GEval) (score: 0.9977370801903189, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The response correctly identifies the need for more information, sets affected components to UNKNOWN, avoids creating hypothetical details, does not fabricate reproduction steps, recommends contacting the user for clarification, sets priority to LOW, and includes a follow-up item to gather additional information., error: None)
+  - ✅ Answer Relevancy (score: 0.7777777777777778, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.78 because while the output provides useful information about ticket type, severity, priority, and justification, it fails to directly address the user's main complaint about the app being garbage. The inclusion of these irrelevant details prevents a higher score, but the relevant parts still contribute to a solid understanding of the issue., error: None)
+
+For test case:
+
+  - input: This app is garbage. Total waste of money.
+  - actual output: === ENGINEERING INSIGHT === TITLE: Unactionable complaint - no technical details TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: P ilk-LOW
+
+TECHNICAL SUMMARY: Insufficient data for engineering action. No specific feature, system, or behavior is described. AFFECTED COMPONENTS:
+
+System: UNKNOWN
+Platform: UNKNOWN
+Environment: UNKNOWN
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User says the app is garbage and a waste of money but provides no specifics.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details (what, when, how)
+DATA GAPS FOR ENGINEERING: No system, platform, environment, error, feature, or behavior is mentioned. No repro steps at all.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: No actionable information for engineering. Cannot investigate what is not described.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Metrics Summary
+
+  - ✅ Vague Feedback Handling (GEval) (score: 0.9665511824345753, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The response acknowledges the lack of technical details, sets affected components to 'UNKNOWN', does not invent systems or reproduction steps, recommends reaching out to the user, sets priority to 'LOW', and includes a checklist for gathering more information., error: None)
+  - ✅ Answer Relevancy (score: 0.8, threshold: 0.5, strict: False, evaluation model: gpt-4o, reason: The score is 0.80 because the output largely focuses on addressing the need to fix issues, which aligns with the input. However, the score isn't higher due to some statements that veer off into categorizing urgency and justifying priorities, which don't directly contribute to the core task of fixing the issues., error: None)
+
+For test case:
+
+  - input: Fix your stuff.
+  - actual output: === ENGINEERING INSIGHT === TITLE: Unavailable - no feedback provided TICKET_TYPE: UNCLEAR SEVERITY: UNKNOWN
+
+TECHNICAL SUMMARY: Insufficient data for engineering. No issue description, system, platform, or environment provided.
+
+AFFECTED COMPONENTS:
+
+System: N/A
+Platform: N/A
+Environment: N/A
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+No steps available
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details
+DATA GAPS FOR ENGINEERING: Everything. No issue, system, platform, or steps provided.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: Cannot investigate without any data.
+  - expected output: None
+  - context: None
+  - retrieval context: None
+
+======================================================================
+
+Overall Metric Pass Rates
+
+Vague Feedback Handling (GEval): 100.00% pass rate
+Answer Relevancy: 75.00% pass rate
+
+======================================================================
+
+
+✓ Tests finished 🎉! Run 'deepeval login' to save and analyze evaluation results on Confident AI.
+ 
+✨👀 Looking for a place for your LLM test data to live 🏡❤️ ? Use Confident AI to get & share 
+testing reports, experiment with models/prompts, and catch regressions for your LLM system. Just 
+run 'deepeval login' in the CLI. 
+
+
+============================================================
+EVALUATION COMPLETE
+============================================================
+
+What to look for:
+  Detailed: Groundedness + Usefulness should PASS
+  Vague:    Vague Handling should PASS
+  All:      Relevancy should PASS
+
+Save a screenshot for before/after comparison.
+(base) jatta@Praveens-MacBook-Pro Code % 

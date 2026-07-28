@@ -1,0 +1,15 @@
+RUN 1 — GPT-4o-mini Base Model (OpenAI)
+Date: July 26, 2026
+
+DETAILED FEEDBACK (F1-F4):
+Engineering Groundedness [GEval]: 0.84 average, 100.00% pass rate
+Engineering Usefulness [GEval]: 0.93 average, 100.00% pass rate
+Answer Relevancy: 0.93 average, 100.00% pass rate
+
+VAGUE FEEDBACK (F5-F8):
+Vague Feedback Handling [GEval]: 1.00 average, 100.00% pass rate
+Answer Relevancy: 0.64 average, 50.00% pass rate
+
+Test cases failed: F5 (This app is garbage) and F7 (Meh. It's fine I guess)
+Reason: Answer Relevancy scored 0.43 and 0.33 — structured engineering ticket 
+format judged as not directly relevant to simple complaints
