@@ -1,0 +1,170 @@
+=== F1 ===
+=== ENGINEERING INSIGHT === TITLE: Checkout freeze on iOS Safari when applying discount codes TICKET_TYPE: BUG SEVERITY: P2-HIGH
+
+TE An iOS Safari user reports a 100% reproduction rate freeze when attempting to apply discount codes on the checkout page using an iPhone 14 with the latest iOS version. The freeze is blocking order completion, resulting in 3 lost orders in one week.
+
+AFFECTED COMPONENTDateS:
+
+System: Frontend (Checkout component)
+Platform: iOS (Safari)
+Environment: iPhone 14, latest iOS version
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+Open the checkout page on iPhone 14 with Safari (latest iOS)
+Add items to cart and proceed to checkout
+Attempt to apply a discount code
+Page freezes completely (user reports unable to interact with the page, cannot navigate away)
+INVESTIGATION CHECKLIST:
+
+[ ] Check Safari console logs for any JavaScript errors during the discount code application
+[ ] Verify if the freeze occurs on other iOS devices/Safari versions
+[ ] Check if the freeze happens with all discount codes or specific codes
+[ ] Review recent changes to the discount code application logic
+[ ] Check networkanship between the freeze and discount code API calls
+DATA GAPS FOR ENGINEERING:
+
+Exact discount code triggering the freeze (if it's specific to certain codes)
+Whether the freeze is a full page hang or a JavaScript freeze
+Whether other iOS devices/Safari versions are affected
+Server-side logs for discount code API calls during the freeze
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUST Turning P2-HIGH - user reports 100% reproduction on a production environment, 3 lost orders in one week, and the freeze is on the checkout page. This blocks revenue and has a high blast radius.
+
+=== F2 ===
+=== ENGINEERING INSIGHT === TITLE: API p95 latency regression from 200ms to 800ms affecting Enterprise plan TICKET_TYPE: BUG SEVERITY: P1-CRITICAL
+
+TECHNICAL SUMMARY: API response times have degraded by 400% since last month, affecting all API requests for an Enterprise customer. p95 latency has increased from 200ms to 800ms. This regression has been reported across 3 separate support tickets, indicating it is a systemic issue and not account-specific.
+
+AFFECTED COMPONENTS:
+
+System: API Gateway
+Platform: Unknown (API team would know infrastructure stack)
+Environment: Production, Enterprise plan
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps:
+
+Make API requests to the production API (specific endpoints not mentioned by user)
+Observed p95 latency at 800ms (up from 200ms)
+This regression started last month
+3 separate support tickets confirm the regression
+INVESTIGATION CHECKLIST:
+
+[ ] Review API request volume and error rates for the past 60 days for signs of changes
+[ ] Check for changes in instance count, scaling, or resource utilization on the API nodes
+[ ] Review recent deploy history for API service for any changes, bug fixes, or config updates
+[ ] Check for changes in database query performance or schema
+[ ] Verify if the regression is consistent across all endpoints or specific to certain fleets
+DATA GAPS FOR ENGINEERING:
+
+Specific API endpoints affected
+Request volumes and error rates pre-regression vs post-regression
+API infrastructure stack (containerization, instance type, load balancer)
+Recent deploy history for the API service
+Database query performance changes
+PRIORITY RECOMMENDATION: P1-CRITICAL PRIORITY JUSTIFICATION: 400% regression in p95 latency on a production API for an Enterprise customer is a showstopper. 3 confirmations across separate tickets indicate this is a systemic issue, not account-specific. API latency directly impacts revenue-generating capabilities for the customer.
+
+=== F3 ===
+=== ENGINEERING INSIGHT === TITLE: Incomplete onboarding - 404 on getting started guide, outdated YouTube tutorial UI matches TICKET_TYPE: BUG SEVERITY: P3-MEDIUM
+
+TECHNICAL SUMMARY: The getting started guide link in the onboarding flow returns a 404 error. External YouTube tutorials show a UI that matches what the user sees, indicating the actual UI has regression or has changed since the video was created. This blocks a new Free plan user from creating their first project.
+
+AFFECTED COMPONENTS:
+
+System: Frontend (onboarding flow, getting breaking guide link)
+Platform: Chrome on Windows
+Environment: Free plan account, created yesterday
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+Signed up for Free plan yesterday
+Completed onboarding
+Clicked through the getting started guide link
+Served a 404 page
+Watched 3 YouTube tutorials showing a different UI than current onboarding
+INVESTIGATION CHECKLIST:
+
+[ ] Check the current URL and status code of the getting started guide link
+[ ] Verify the expected content exists and is up-to-date
+[ ] Check if the link is redirecting correctly through CDNs or redirects
+[ ] Check the UI diff between the current onboarding and the UI shown in the YouTube tutorials
+[ ] Check if the regression is specific to Free plan or all plans
+DATA GAPS FOR ENGINEERING:
+
+Exact URL of the 404 page
+HTTP status code of the 404
+Onboarding flow steps that lead to the 404 (what specifically was clicked)
+Account ID for server-side investigation
+Exact YouTube video IDs for the tutorials
+PRIORITY RECOMMENDATION: P3-MEDIUM PRIORITY JUSTIFICATION: Onboarding is the first user experience. A 404 on the getting started guide and outdated tutorial UI means a new user cannot complete onboarding. This blocks the user from activating their account and startingaccording to our CAC metrics.
+
+=== F4 ===
+=== ENGINEERING INSIGHT === TITLE: Unauthorized login from Romania on account AC-41209 with compromised credentials TICKET_TYPE: BUG SEVERITY: P2-HIGH
+
+TECHNICAL SUMMARY: A login alert detected an unauthorized access attempt from IP 203.0.113.42 (Romania) at 3:47 AM EST on account AC-41209 (lisa.t@company.com). The user reports they changed their password and enabled 2FA, suggesting their credentials were compromised. We need to determine if account data was accessed and provide the user with a 30-day audit log and information on whether other accounts were affected.
+
+AFFECTED COMPONENTS:
+
+System: Authentication
+Platform: Not platform-specific (cross-platform issue)
+Environment: Production environment, account AC-41209
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User reports no login session started after changing password and enabling 2FA at an unknown previous time.
+Login alert detected access from IP 203.0.113.42 (Romania) at 3:47 AM EST
+INVESTIGATION CHECKLIST:
+
+[ ] Check authentication logs for the account AC-41209 for all login attempts since the password change
+[ ] Verify the new password hash and 2FA secrets were not compromised
+[ ] Check for session fixation or token reuse
+[ ] Run IP lookup and threat intelligence on 203.0mtime.113.42
+[ ] Check for any other accounts with the same password hash compromised in the last 90 days
+[ ] Review account activity for AC-41209 for the past 30 days
+DATA GAPS FOR ENGINEERING:
+
+Exact time of password compromise (before or after the user changed the password)
+Whether data was accessed or what data was accessed
+Session duration and actions performed during the unauthorized session
+Whether the 2FA was bypassed or the authenticator token was captured
+Whether the compromised credentials were used on other accounts
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: Data breach, potential PII exposure. User took security precautions after compromise detected, indicating the attacker likely had access for some time. Need to confirm data access and scope other account compromise.
+
+=== F5 ===
+=== ENGINEERING INSIGHT === TITLE: Unactionable complaint - no technical details TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: P ilk-LOW
+
+TECHNICAL SUMMARY: Insufficient data for engineering action. No specific feature, system, or behavior is described. AFFECTED COMPONENTS:
+
+System: UNKNOWN
+Platform: UNKNOWN
+Environment: UNKNOWN
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User says the app is garbage and a waste of money but provides no specifics.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details (what, when, how)
+DATA GAPS FOR ENGINEERING: No system, platform, environment, error, feature, or behavior is mentioned. No repro steps at all.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: No actionable information for engineering. Cannot investigate what is not described.
+
+=== F6 ===
+Cannot write what I do not know. What is the user feedback? Provide the classified user feedback and I will write a structured engineering insight.
+
+=== F7 ===
+INSUFFICIENT DATA for engineering. Cannot write structured insight without user behavior. What would you like to add to provide engineering context? What were you trying to do, what happened, on what platform, and under what conditions?
+
+=== F8 ===
+=== ENGINEERING INSIGHT === TITLE: Unavailable - no feedback provided TICKET_TYPE: UNCLEAR SEVERITY: UNKNOWN
+
+TECHNICAL SUMMARY: Insufficient data for engineering. No issue description, system, platform, or environment provided.
+
+AFFECTED COMPONENTS:
+
+System: N/A
+Platform: N/A
+Environment: N/A
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+No steps available
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details
+DATA GAPS FOR ENGINEERING: Everything. No issue, system, platform, or steps provided.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: Cannot investigate without any data.

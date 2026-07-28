@@ -1,0 +1,174 @@
+=== F1 ===
+=== ENGINEERING INSIGHT === TITLE: Checkout freeze on iOS Safari when applying discount codes TICKET_TYPE: BUG SEVERITY: HIGH TECHNICAL SUMMARY: The checkout page freezes when attempting to apply a discount code on an iPhone 14 running latest iOS version, specifically on Safari. This issue occurs consistently, resulting in lost orders. The root cause of the freeze is unknown.
+
+AFFECTED COMPONENTS:
+
+System: Checkout
+Platform: iOS
+Environment: Mobile
+REPRODUCTION STEPS:
+
+Open the app on an iPhone 14 with latest iOS version
+Navigate to the checkout page
+Attempt to apply a discount code
+INVESTIGATION CHECKLIST:
+
+[ ] Review Safari browser version and compatibility with the app
+[ ] Inspect the checkout page JavaScript for any potential freezes or errors
+[ ] Verify the discount code API integration for any issues
+DATA GAPS FOR ENGINEERING:
+
+Error logs or crash reports from the iOS app
+Details about the specific Safari browser version and its configuration
+Additional information about the discount code API integration
+PRIORITY RECOMMENDATION: P1-CRITICAL PRIORITY JUSTIFICATION: The issue results in lost orders, which has a significant impact on user experience and potentially revenue.
+
+=== F2 ===
+=== ENGINEERING INSIGHT === TITLE: API Response Times Degradation on Enterprise Plan TICKET_TYPE: PERFORMANCE SEVERITY: P1-CRITICAL TECHNICAL SUMMARY: accustomed API response times have increased significantly, with p95 latency rising from 200ms to 800ms, affecting production systems on the Enterpriseㅋㅋ plan. This degradation has been persistent since last month. Further investigation is required to determine the root cause.
+
+AFFECTED COMPONENTS:
+
+System: API
+آسیاب Platform: Enterprise
+Environment: Production
+REPRODUCTION STEPS:
+
+The issue has been reported across multiple tickets, but no specific steps to reproduce the issue have been provided.
+INVESTIGATION CHECKLIST:
+
+[ ] Review system logs for any changes or anomalies in the last month
+[ ] Check for any recent changes to API configuration, deployment, or scaling
+[ ] Verify resource utilization and performance metrics for the API
+DATA GAPS FOR ENGINEERING:
+
+Detailed performance metrics and logs for the last month
+Information on recent changes to the API, deployment, or scaling
+PRIORITY RECOMMENDATION: P1-CRITICAL PRIORITY JUSTIFICATION: The significant degradation in API response times has a blast radius of impacting all users on the Enterprise plan, which could lead to data integrity risks and overall system instability.
+
+=== F3 ===
+=== ENGINEERING INSIGHT === TITLE: Confusing onboarding flow and 404 error on getting started guide TICKET_TYPE: BUG SEVERITY: HIGH TECHNICAL SUMMARY: The onboarding flow is causing user confusion due to a discrepancy between the getting started guide and the actual UI. This results in users being unable to create their first project. The issue is further complicated by outdated YouTube tutorials that show a different UI.
+
+AFFECTED COMPONENTS:
+
+System: Onboarding
+Platform: Web (Chrome on Windows)
+Environment: Free plan
+REPRODUCTION STEPS:
+
+Signed up for a free plan yesterday
+Attempted to access the getting started guide
+Encountered a 404 error
+Watched 3 YouTube tutorials that showed a different UI than the actual application
+Still unable to create a project
+INVESTIGATION CHECKLIST:
+
+Verify the getting started guide link is correct and not pointing to a 404 page
+Review the current UI to identify any changes that may have occurred recently
+Investigate the source of the outdated YouTube tutorials and determine if they can be updated
+Check if there are any known issues with the onboarding flow for free plan users
+DATA GAPS FOR ENGINEERING:
+
+Technical details about the 404 error (error code, log entries, etc.)
+Information about recent changes to the onboarding flow or UI
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This issue is impacting new users and preventing them from creating their first project, which is a critical step in the onboarding process. The high blast radius and potential for user frustration justify a high priority.
+
+=== F4 ===
+=== ENGINEERING INSIGHT === TITLE: Unauthorized login attempt from Romania at 3:47 AM EST TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: HIGH
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. An unauthorized login attempt was made from IP 203.getZero.113.42 in Romania at 3:47 AM EST to account lisa.t@company.com (#AC-41209), which has a changed password and enabled 2FA. Engineering needs more information to determine the scope of the incident.
+
+AFFECTED COMPONENTS:
+
+System: Authentication
+Platform: Web
+Environment: Production
+REPRODUCTION STEPS:
+
+The user reported an unauthorized login attempt to their account lisa.t@company.com (#AC-41209) from IP 203.0.113.42 in Romania at 3:47 AM EST.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details (e.g., what actions they took before the incident, any other accounts they suspect may be affected)
+[ ] Review the 30-day audit log for the account to determine if any unauthorized access occurred
+[ ] Check if the IP 203.0.113.42 has been used for any other suspicious activity in our system
+DATA GAPS FOR ENGINEERING:
+
+Details about the user's actions before the incident
+Information about other accounts that may be affected
+Any other relevant technical details from the user
+PRIORITY RECOMMENDATION: P1-CRITICAL PRIORITY JUSTIFICATION: High priority due to potential data breach and security risk, as the user's password has been changed and 2FA is enabled, but the login attempt still occurred.
+
+=== F5 ===
+=== ENGINEERING INSIGHT === TITLE: Unclear technical issue with the app TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: UNCLASSIFIED
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. The user has reported dissatisfaction with the app, but no specific technical issue is described.
+
+AFFECTED COMPONENTS:
+
+System: Entire app
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS:
+
+The user reports that the app is "garbage" and a "total waste of money",(reordered to focus on what they did, but the user didn't describe any steps)
+INVESTIGATION CHECKLIST:
+
+Reach out to user for technical details
+Clarify what specific issues they are experiencing
+DATA GAPS FOR ENGINEERING:
+
+Specific technical issue description
+Platform and environment details
+PRIORITY RECOMMENDATION: Unknown PRIORITY JUSTIFICATION: Insufficient information to determine priority.
+
+=== F6 ===
+=== ENGINEERING INSIGHT === TITLE: Poor user experience with checkout process TICKET_TYPE: BUG SEVERITY: P2-HIGH TECHNICAL SUMMARY: The checkout process is not functioning as expected, resulting in a poor user experience. This issue is specific to iOS Safari and occurs when applying discount codes. The exact nature of the failure is unknown.
+
+AFFECTED COMPONENTS:
+
+System: Checkout
+Platform: iOS
+Environment: Safari browser
+REPRODUCTION STEPS:
+
+Users report that the checkout process freezes when attempting to apply discount codes on iOS Safari.
+INVESTIGATION CHECKLIST:
+
+[ ] Review checkout API calls to identify any potential issues
+[ ] Inspect Safari-specific rendering and JavaScript execution
+[ ] Verify discount code validation and application logic
+DATA GAPS FOR ENGINEERING:
+
+More detailed error logs or crash reports from affected users
+Information on the specific version of iOS and Safari being used
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This issue is impacting the user experience and could potentially result in lost sales, although the exact scale is unknown. Further investigation is required to understand the root cause and implement a fix.
+
+=== F7 ===
+=== ENGINEERING INSIGHT === TITLE: Insufficient feedback for engineering action TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: UNKNOWN TECHNICAL SUMMARY: Insufficient feedback for engineering action. The user has provided feedback but it does not contain enough information for the engineering team to understand the MPU issue.
+
+AFFECTED COMPONENTS:
+
+System: Unknown
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS:
+
+User reported the issue but did not provide enough information.
+INVESTIGATION CHECKLIST:
+
+Reach out to user for technical details -biggest issue is lack of information from user
+possibly need to clarify what the user means by 'fine, I guess'
+DATA GAPS FOR ENGINEERING:
+
+Technical information about the issue
+Specific steps to reproduce the problem
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: The issue is unclear and there is no immediate impact on users, but further investigation is needed to determine the nature of the issue.
+
+=== F8 ===
+I need more information from you to create a well-structured engineering insight. Please provide the feedback from the user, and the classifier output, which should include the following fields:
+
+TICKET_TYPE (BUG / FEATURE / PERFORMANCE / INVESTIGATION_NEEDED)
+SEVERITY (from classifier)
+AFFECTED_SYSTEM
+PLATFORM
+ENVIRONMENT
+Please provide the feedback from the user and the classifierSupportActionBar

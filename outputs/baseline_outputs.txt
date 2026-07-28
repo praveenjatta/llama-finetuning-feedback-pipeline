@@ -1,0 +1,188 @@
+=== F1 ===
+=== ENGINEERING INSIGHT === TITLE: Checkout freeze on iPhone 14 when applying discount codes TICKET_TYPE: BUG SEVERITY: HIGH
+
+TECHNICAL SUMMARY: Users are experiencing a freeze on the checkout page when attempting to apply a discount code on an iPhone 14 using Safari. This issue occurs consistently and results in the inability to complete orders, indicating a potential frontend or interaction problem within the checkout process.
+
+AFFECTED COMPONENTS:
+
+System: Checkout Process
+Platform: iOS
+Environment: Production
+REPRODUCTION STEPS:
+
+Open the checkout page on an iPhone 14 using Safari.
+Attempt to apply a discount code.
+Observe that the page freezes and does not allow further interaction.
+INVESTIGATION CHECKLIST:
+
+[ ] Check the compatibility of the discount code feature with iOS Safari.
+[ ] Review error logs related to the checkout page during attempts to apply a discount code.
+[ ] Investigate the frontend code handling discount code entries and submissions for potential issues.
+DATA GAPS FOR ENGINEERING:
+
+Details on the specific discount codes being used.
+User's iOS version and Safari build information to ensure no compatibility issues.
+Any network conditions that may be contributing to the freeze.
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This issue directly impacts users' ability to complete purchases, leading to potential loss of sales and negatively affecting customer satisfaction. Immediate investigation is warranted to mitigate further order losses.
+
+=== F2 ===
+=== ENGINEERING INSIGHT === TITLE: Significant degradation in API response times impacting production TICKET_TYPE: PERFORMANCE SEVERITY: P2-HIGH
+
+TECHNICAL SUMMARY: The API response times have significantly degraded, with the p95 latency increasing from 200ms to 800ms over the past month. This degradation is affecting production systems, leading to potential performance issues for users relying on the API.
+
+AFFECTED COMPONENTS:
+
+System: API
+Platform: Enterprise plan
+Environment: Production
+REPRODUCTION STEPS:
+
+Monitor p95 latency of API responses over the past month.
+Compare current p95 latency results (800ms) with historical data (200ms).
+INVESTIGATION CHECKLIST:
+
+[ ] Analyze server performance metrics to identify potential bottlenecks.
+[ ] Review recent changes or deployments that may have impacted API performance.
+[ ] Investigate any increases in traffic or usage patterns that could correlate with latency increase.
+DATA GAPS FOR ENGINEERING:
+
+Detailed performance logs for the API to identify specific endpoints experiencing higher latency.
+Information on any recent changes to the API that might relate to the degradation.
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This issue impacts production systems, affecting the reliability and performance of services for users. High priority is warranted to minimize disruption and restore optimal performance.
+
+=== F3 ===
+=== ENGINEERING INSIGHT === TITLE: Confusing onboarding flow and broken getting started guide link TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: Unknown - single report
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. The user has reported confusion with the onboarding process and inability to create their first project. Additionally, the getting started guide is resulting in a 404 error, and discrepancies exist between the user interface the user experiences and what is displayed in existing tutorial videos.
+
+AFFECTED COMPONENTS:
+
+System: Onboarding flow and documentation
+Platform: Chrome on Windows
+Environment: Free plan
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User signed up for a free plan.
+User attempted to find how to create their first project.
+User accessed a getting started guide which led to a 404 error.
+User compared their UI with YouTube tutorials and found discrepancies.
+INVESTIGATION CHECKLIST:
+
+[ ] Verify the accessibility of the getting started guide link and fix the 404 error.
+[ ] Review the current onboarding flow for clarity and ease of use.
+[ ] Gather feedback from other users regarding their onboarding experience to identify common issues.
+DATA GAPS FOR ENGINEERING:
+
+Specific steps the user took during the onboarding process.
+Details of the discrepancies noted between the user interface and tutorial videos.
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This issue affects the onboarding experience for new users, which can directly impact user retention and engagement. Clarifying the onboarding process is crucial for usability, and fixing the broken guide link will prevent further frustration.
+
+=== F4 ===
+=== ENGINEERING INSIGHT === TITLE: Unauthorized login alert for account lisa.t@company.com TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: High
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. The user reported an unauthorized login attempt at 3:47 AM EST from an IP address in Romania. They have since changed their password and enabled two-factor authentication, but further investigation is needed to assess potential data access and any impacts on related accounts.
+
+AFFECTED COMPONENTS:
+
+System: User Account Management
+Platform: Web Application
+Environment: Production
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User received an alert of a login from an unknown IP address.
+User confirmed that they did not log in at that time.
+User changed their password and enabled two-factor authentication following the incident.
+INVESTIGATION CHECKLIST:
+
+[ ] Verify if any data was accessed during the unauthorized login.
+[ ] Retrieve and review the 30-day audit log for account activities.
+[ ] Investigate if other accounts were accessed from the same IP address or linked to the user's account.
+DATA GAPS FOR ENGINEERING:
+
+Confirmation of whether data was accessed during the unauthorized login.
+Details on potential impacts on other accounts related to the user's account.
+PRIORITY RECOMMENDATION: P2-HIGH PRIORITY JUSTIFICATION: This incident poses a significant security risk as it involves unauthorized access to a user account, which could compromise sensitive data and potentially affect other related accounts. Immediate investigation is necessary to ensure user safety and data integrity.
+
+=== F5 ===
+=== ENGINEERING INSIGHT === TITLE: Insufficient feedback for technical investigation TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: Unknown
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. No specific issues or environment details provided for further investigation.
+
+AFFECTED COMPONENTS:
+
+System: Unknown
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+No specific steps provided.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details.
+DATA GAPS FOR ENGINEERING: No specific technical information or user behavior is available to begin an investigation.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: Without specific issues or details provided, this does not indicate a critical urgency for engineering action.
+
+=== F6 ===
+=== ENGINEERING INSIGHT === TITLE: Insufficient feedback for engineering action TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: UNKNOWN
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action. The user's feedback does not specify any technical issue or details regarding their experience.
+
+AFFECTED COMPONENTS:
+
+System: Unknown
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User provided negative feedback but did not describe specific issues or steps to reproduce.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details.
+DATA GAPS FOR ENGINEERING:
+
+Specific information regarding what the user experienced as "terrible."
+Details on where and when the issue occurred (e.g., system, platform, environment).
+Any error messages or conditions leading to the negative experience.
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: The feedback provides no actionable information to indicate a specific issue affecting users or systems.
+
+=== F7 ===
+=== ENGINEERING INSIGHT === TITLE: Insufficient feedback for engineering action TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: Unknown
+
+TECHNICAL SUMMARY: Insufficient feedback for engineering action.
+
+AFFECTED COMPONENTS:
+
+System: Unknown
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User expressed indifference towards the subject.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details.
+DATA GAPS FOR ENGINEERING:
+
+Specific feedback or details about the experience that prompted the comment are missing.
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: Low impact as there is no clear issue or request identified from the feedback. User sentiment is neutral and does not indicate pressing concerns.
+
+=== F8 ===
+=== ENGINEERING INSIGHT === TITLE: Insufficient feedback for engineering action TICKET_TYPE: INVESTIGATION_NEEDED SEVERITY: Unknown
+
+TECHNICAL SUMMARY: Insufficient feedback provided, preventing engineering from understanding the specific issue or context. No details are available regarding the nature of the problem or affected functionality.
+
+AFFECTED COMPONENTS:
+
+System: Unknown
+Platform: Unknown
+Environment: Unknown
+REPRODUCTION STEPS: INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps
+
+User reports a problem but provides no additional details.
+INVESTIGATION CHECKLIST:
+
+[ ] Reach out to user for technical details.
+DATA GAPS FOR ENGINEERING: Specific information regarding the issue reported by the user is missing. Information such as the affected system, platform, and specific behaviors are needed to proceed.
+
+PRIORITY RECOMMENDATION: P4-LOW PRIORITY JUSTIFICATION: Without clear feedback, there is minimal impact on users, and no urgent risk to data integrity or service reliability.
