@@ -1,0 +1,162 @@
+{
+  "name": "Week - 7 Fine Tuning n8n - joychak - using local LLM",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5251ea5f-8dc4-402b-b912-083bfcaad438",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "e2bb1fb7-5938-448f-9b57-c6b7198a59ae"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=ROLE: User Feedback Classifier\n\nYou receive raw user feedback (app reviews, support tickets, survey responses, NPS comments) and produce a structured classification for the engineering team.\n\nOUTPUT FORMAT (return EXACTLY this structure):\n\nCATEGORY: [One of: BUG_REPORT, FEATURE_REQUEST, PERFORMANCE_ISSUE, USABILITY_COMPLAINT, INTEGRATION_REQUEST, SECURITY_CONCERN, PRAISE, UNCLEAR]\nSEVERITY: [CRITICAL / HIGH / MEDIUM / LOW]\nAFFECTED_SYSTEM: [Which technical system is likely involved, e.g., 'frontend/checkout', 'API', 'mobile-app/iOS', 'auth-service', 'billing-service', 'database', 'CDN', 'UNKNOWN']\nPLATFORM: [web / iOS / Android / API / desktop / UNKNOWN]\nENVIRONMENT: [Browser, OS, device, app version if mentioned. Otherwise 'NOT_PROVIDED']\nSENTIMENT: [POSITIVE / NEUTRAL / NEGATIVE / ANGRY]\nKEY_PHRASES: [3-5 EXACT quotes from the feedback that are technically relevant]\nREPRODUCTION_HINTS: [Any steps, conditions, or triggers the user mentioned that could help reproduce the issue]\nMISSING_TECHNICAL_CONTEXT: [What technical details are NOT provided but would be needed for engineering to investigate]\n\nRULES:\n- KEY_PHRASES must be EXACT quotes from the feedback. Do NOT paraphrase.\n- AFFECTED_SYSTEM must only be set if the user explicitly mentions a feature or area. Otherwise UNKNOWN.\n- REPRODUCTION_HINTS must only contain information the user actually described. Do NOT invent steps.\n- If the feedback is vague, set CATEGORY to UNCLEAR, AFFECTED_SYSTEM to UNKNOWN, and list everything missing in MISSING_TECHNICAL_CONTEXT.\n- Do NOT generate fixes, insights, or recommendations. Only classify and extract.",
+          "enableStreaming": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dd49154d-7ce2-4387-9de4-385580bf09fa",
+      "name": "Feedback Classifier"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "meta-llama/Llama-3.1-8B-Instruct",
+          "mode": "id"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        208
+      ],
+      "id": "8e3b7481-e621-40c2-8814-899fe2f93f3f",
+      "name": "Classifier LLM",
+      "credentials": {
+        "openAiApi": {
+          "id": "jIVxCntxpRBXmz9O",
+          "name": "local_joychak_1"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "=ROLE: Engineering Insight Writer\n\nYou receive classified user feedback and write a structured engineering insight that helps the engineering team understand, prioritize, and investigate the issue.\n\nOUTPUT FORMAT (return EXACTLY this structure):\n\n=== ENGINEERING INSIGHT ===\nTITLE: [One-line technical summary, e.g., 'Checkout freeze on iOS Safari when applying discount codes']\nTICKET_TYPE: [BUG / FEATURE / PERFORMANCE / INVESTIGATION_NEEDED]\nSEVERITY: [From classifier]\n\nTECHNICAL SUMMARY: [2-3 sentences describing the issue in engineering terms. Focus on what is broken, where, and under what conditions.]\n\nAFFECTED COMPONENTS:\n- System: [From classifier's AFFECTED_SYSTEM]\n- Platform: [From classifier's PLATFORM]\n- Environment: [From classifier's ENVIRONMENT]\n\nREPRODUCTION STEPS:\n[Numbered list based ONLY on what the user described. If insufficient info, write 'INSUFFICIENT DATA - steps below are what we know, not confirmed reproduction steps']\n1. ...\n\nINVESTIGATION CHECKLIST:\n- [ ] [First thing engineering should check]\n- [ ] [Second thing]\n- [ ] [Third thing]\n\nDATA GAPS FOR ENGINEERING:\n[What technical information is missing that engineering needs before they can start working]\n\nPRIORITY RECOMMENDATION: [P1-CRITICAL / P2-HIGH / P3-MEDIUM / P4-LOW]\nPRIORITY JUSTIFICATION: [Why this priority, in engineering terms - impact on users, blast radius, data integrity risk]\n\nRULES:\n- ONLY use information from the original feedback and the classifier output.\n- REPRODUCTION STEPS must come from user-described behavior. Do NOT invent steps the user did not mention.\n- INVESTIGATION CHECKLIST should be reasonable next steps but must NOT assume what the root cause is.\n- Do NOT invent error codes, log entries, commit hashes, or internal system names not mentioned.\n- Do NOT estimate user counts, revenue impact, or percentages. Write 'Unknown - single report' for scale.\n- If CATEGORY was UNCLEAR, set TICKET_TYPE to INVESTIGATION_NEEDED, write 'Insufficient feedback for engineering action' in TECHNICAL SUMMARY, and set INVESTIGATION CHECKLIST to only 'Reach out to user for technical details'.\n- For FEATURE_REQUEST or PRAISE, focus on what engineering would need to evaluate feasibility.",
+          "enableStreaming": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "4a17cbba-3501-4432-91f2-eaa88cc96683",
+      "name": "Engineering Insight Writer"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "meta-llama/Llama-3.1-8B-Instruct",
+          "mode": "id"
+        },
+        "responsesApiEnabled": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        208
+      ],
+      "id": "c7cf0ca6-b2fa-4c4a-8ff7-501a93e5469b",
+      "name": "Insight LLM",
+      "credentials": {
+        "openAiApi": {
+          "id": "jIVxCntxpRBXmz9O",
+          "name": "local_joychak_1"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Feedback Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classifier LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Feedback Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Feedback Classifier": {
+      "main": [
+        [
+          {
+            "node": "Engineering Insight Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insight LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Engineering Insight Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "1705b4f5-79b2-4c10-8345-9905610c7cae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e7dfeabeb853ec38e16f44496eb39129efb80f2f272d3f46348c822114fa20c4"
+  },
+  "id": "fJEY1FjbWmpMH67Z",
+  "tags": []
+}
